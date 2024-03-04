@@ -1,0 +1,36 @@
+# Use root/example as user/password credentials
+version: '3.1'
+
+services:
+  elasticsearch:
+    image: elasticsearch:7.17.3
+    environment:
+      - discovery.type=single-node
+      - ES_JAVA_OPTS=-Xms1g -Xmx1g
+      - xpack.security.enabled=false
+    volumes:
+      - es_data:/usr/share/elasticsearch/data
+    ports:
+      - target: 9200
+        published: 9200
+    networks:
+      - elastic
+
+  elastichq:
+    image: elastichq/elasticsearch-hq
+    container_name: elastichq
+    ports:
+      - 5001:5000
+    environment:
+      - HQ_DEFAULT_URL=http://elasticsearch:9200
+      - HQ_ENABLE_SSL=False
+    networks:
+      - elastic
+
+volumes:
+  es_data:
+    driver: local
+networks:
+  elastic:
+    name: elastic
+    driver: bridge

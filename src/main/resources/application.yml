@@ -1,0 +1,64 @@
+spring:
+  application:
+    name: api-gateway
+  config:
+    activate:
+      on-profile: local, default, test, itest
+  data:
+    mongodb:
+      uri: mongodb://root:example@localhost:27017/user-service?authSource=admin
+  mongodb:
+    embedded:
+      version: 4.4.3
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+    virtual-host: /
+
+server:
+  servlet:
+    context-path: /api/v0
+  port: 8086
+
+#  Log all web requests
+logging:
+  level:
+    org.springframework.web: INFO
+    org.springframework.web.filter.CommonsRequestLoggingFilter: DEBUG
+  pattern:
+    console: |
+      %d{yyyy-MM-dd HH:mm:ss} [ %-5level] [app: ${spring.application.name}] [thread: %thread] %replace([trace-id: %X{traceId}]){'\[trace-id: \]', ''} %logger{36} %msg%n
+
+user-service:
+  upstreams:
+    - name: meta-service
+      url: http://localhost:8080/api/meta-service/v0
+
+
+---
+spring:
+  config:
+    activate:
+      on-profile: dev, staging, production
+  data:
+    mongodb:
+      uri: mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_SERVER}/annotation?authSource=admin
+
+  rabbitmq:
+    host: ${RABBITMQ_HOST}
+    port: ${RABBITMQ_PORT}
+    username: ${RABBITMQ_USERNAME}
+    password: ${RABBITMQ_PASSWORD}
+    virtual-host: ${RABBITMQ_VIRTUAL_HOST}
+
+api-gateway:
+  token-expiry-in-seconds: 7200
+  api-keys:
+    - firstKey
+    - secondKey
+  upstreams:
+    - name: meta-service
+      url: http://localhost:8080/api/interaction/v0
+

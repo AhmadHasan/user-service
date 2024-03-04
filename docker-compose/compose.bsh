@@ -1,0 +1,1 @@
+docker-compose -f elasticSearch.yml -f mongodb.yml -f rabbitmq.yml up -d

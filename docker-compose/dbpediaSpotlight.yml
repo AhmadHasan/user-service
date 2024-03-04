@@ -1,0 +1,18 @@
+# Use root/example as user/password credentials
+version: '3.1'
+
+services:
+  spotlight.en:
+    image: dbpedia/dbpedia-spotlight
+    container_name: dbpedia-spotlight.en
+    command: /bin/spotlight.sh en
+    ports:
+      - "0.0.0.0:2222:80"
+    volumes:
+      - spotlight-model:/opt/spotlight
+    restart: unless-stopped
+    mem_limit: 12g
+
+volumes:
+  spotlight-model:
+    external: true
