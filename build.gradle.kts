@@ -35,11 +35,15 @@ dependencies {
     implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.14.2")
     implementation("com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.15.2")
 
+    // RabbitMQ dependencies
+    implementation("org.springframework.boot:spring-boot-starter-amqp")
+    implementation("com.rabbitmq:amqp-client")
+    implementation(kotlin("stdlib"))
+
     // Swagger dependencies
-    implementation("io.springfox:springfox-swagger2:3.0.0")
-    implementation("io.springfox:springfox-swagger-ui:3.0.0")
-    implementation("io.springfox:springfox-boot-starter:3.0.0")
-    implementation("org.springframework.boot:spring-boot-starter-parent:3.0.4")
+    implementation("org.springdoc:springdoc-openapi-data-rest:1.6.0")
+    implementation("org.springdoc:springdoc-openapi-ui:1.6.0")
+    implementation("org.springdoc:springdoc-openapi-kotlin:1.6.0")
 
     // SLF4J dependencies
     implementation("org.apache.logging.log4j:log4j-to-slf4j")
@@ -47,10 +51,10 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
     implementation("org.springframework.boot:spring-boot-starter-webflux")
 
-    // RabbitMQ dependencies
-    implementation("org.springframework.boot:spring-boot-starter-amqp")
-    implementation("com.rabbitmq:amqp-client")
-    implementation(kotlin("stdlib"))
+    // Swagger dependencies
+    implementation("org.springdoc:springdoc-openapi-data-rest:1.6.0")
+    implementation("org.springdoc:springdoc-openapi-ui:1.6.0")
+    implementation("org.springdoc:springdoc-openapi-kotlin:1.6.0")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.mockito.kotlin:mockito-kotlin:3.2.0")

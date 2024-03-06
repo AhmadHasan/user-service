@@ -6,7 +6,7 @@ import java.util.UUID
 
 data class User(
     @Id
-    val value: UUID = UUID.randomUUID(),
+    val id: UUID = UUID.randomUUID(),
     val createdAt: Date = Date(),
     val profile: Profile
 )

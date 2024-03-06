@@ -1,6 +1,6 @@
 spring:
   application:
-    name: api-gateway
+    name: user-service
   config:
     activate:
       on-profile: local, default, test, itest
@@ -53,7 +53,7 @@ spring:
     password: ${RABBITMQ_PASSWORD}
     virtual-host: ${RABBITMQ_VIRTUAL_HOST}
 
-api-gateway:
+user-service:
   token-expiry-in-seconds: 7200
   api-keys:
     - firstKey
