@@ -51,11 +51,6 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
     implementation("org.springframework.boot:spring-boot-starter-webflux")
 
-    // Swagger dependencies
-    implementation("org.springdoc:springdoc-openapi-data-rest:1.6.0")
-    implementation("org.springdoc:springdoc-openapi-ui:1.6.0")
-    implementation("org.springdoc:springdoc-openapi-kotlin:1.6.0")
-
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.mockito.kotlin:mockito-kotlin:3.2.0")
     testImplementation("de.flapdoodle.embed:de.flapdoodle.embed.mongo")
