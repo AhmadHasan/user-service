@@ -39,6 +39,13 @@ class RequestResponseLoggingFilter : Filter {
         responseTime: Long
     ) {
         val traceId = MDC.get(TRACE_ID_MDC_KEY) ?: "No Trace ID"
-        logger.info("Trace ID: {}, Request URI: {}, Response Status: {}, Response Time: {} ms", traceId, request.requestURI, response.status, responseTime)
+        logger.info(
+            "Trace ID: {}, Request URI: {}, Response Status: {}, Response Time: {} ms, response(100): {}",
+            traceId,
+            request.requestURI,
+            response.status,
+            responseTime,
+            response.contentAsByteArray.toString(Charsets.UTF_8).take(100)
+        )
     }
 }

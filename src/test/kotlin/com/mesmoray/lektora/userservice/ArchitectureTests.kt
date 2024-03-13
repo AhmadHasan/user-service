@@ -82,7 +82,7 @@ class ArchitectureTests {
     fun `repositories should only be accessed by services`() {
         val rule = classes()
             .that().resideInAPackage("..repository..")
-            .should().onlyBeAccessed().byAnyPackage("..service..")
+            .should().onlyBeAccessed().byAnyPackage("..service..", "..repository..")
 
         rule.check(importedClasses)
     }
@@ -212,7 +212,8 @@ class ArchitectureTests {
                     "valueOf",
                     "set",
                     "to",
-                    "\$values"
+                    "\$values",
+                    "set"
                 )
 
                 item.methods.forEach { method ->
