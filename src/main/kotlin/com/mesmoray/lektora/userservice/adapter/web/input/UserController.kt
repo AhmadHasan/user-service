@@ -21,10 +21,9 @@ class UserController {
     @PutMapping
     @ResponseStatus(HttpStatus.OK)
     fun createUser(@RequestBody userProfile: UserProfile): User {
-        val user = userService.createUser(
+        return userService.createUser(
             countryCodes = userProfile.countryCodes,
             languageCodes = userProfile.languageCodes
         )
-        return user
     }
 }

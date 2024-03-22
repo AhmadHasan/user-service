@@ -2,13 +2,13 @@
 #     Swagger UI    #
 #####################
 
-http://localhost:8086/api/v0/swagger-ui/index.html
+http://localhost:8086/api/user/v0/swagger-ui.html
 
 #####################
 #     Health Check  #
 #####################
 
-curl -i -X GET http://localhost:8086/api/v0/health
+curl -i -X GET http://localhost:8086/api/user/v0/health
 
 #####################
 #  Users            #

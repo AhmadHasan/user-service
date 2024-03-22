@@ -19,7 +19,7 @@ spring:
 
 server:
   servlet:
-    context-path: /api/v0
+    context-path: /api/user/v0
   port: 8086
 
 #  Log all web requests

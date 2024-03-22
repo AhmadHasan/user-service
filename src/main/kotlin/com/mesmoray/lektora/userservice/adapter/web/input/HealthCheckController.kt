@@ -1,5 +1,6 @@
 package com.mesmoray.lektora.userservice.adapter.web.input
 
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
@@ -9,11 +10,14 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("/health")
 class HealthCheckController {
 
+    @Value("\${spring.application.name}")
+    var applicationName: String? = null
+
     @GetMapping
     fun checkHealth(): ResponseEntity<String> {
         val status = performHealthCheck()
         return if (status) {
-            ResponseEntity.ok("Application is healthy")
+            ResponseEntity.ok("Application $applicationName is healthy")
         } else {
             ResponseEntity.status(500).body("Application is unhealthy")
         }
