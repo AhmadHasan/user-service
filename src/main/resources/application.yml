@@ -6,7 +6,7 @@ spring:
       on-profile: local, default, test, itest
   data:
     mongodb:
-      uri: mongodb://root:example@localhost:27017/user-service?authSource=admin
+      uri: mongodb://root:example@localhost:27017/users?authSource=admin
   mongodb:
     embedded:
       version: 4.4.3
@@ -44,7 +44,7 @@ spring:
       on-profile: dev, staging, production
   data:
     mongodb:
-      uri: mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_SERVER}/annotation?authSource=admin
+      uri: mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_SERVER}/users?authSource=admin
 
   rabbitmq:
     host: ${RABBITMQ_HOST}
