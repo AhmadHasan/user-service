@@ -1,9 +1,6 @@
 spring:
   application:
     name: user-service
-  config:
-    activate:
-      on-profile: local, default, test, itest
   data:
     mongodb:
       uri: mongodb://root:example@localhost:27017/users?authSource=admin
