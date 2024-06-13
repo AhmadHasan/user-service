@@ -49,6 +49,8 @@ spring:
     username: ${RABBITMQ_USERNAME}
     password: ${RABBITMQ_PASSWORD}
     virtual-host: ${RABBITMQ_VIRTUAL_HOST}
+server:
+  port: 8080
 
 user-service:
   token-expiry-in-seconds: 7200
