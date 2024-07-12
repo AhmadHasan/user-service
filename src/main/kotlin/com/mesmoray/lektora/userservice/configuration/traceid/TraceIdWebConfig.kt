@@ -6,7 +6,7 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
 
 @Configuration
-class WebConfig : WebMvcConfigurer {
+class TraceIdWebConfig : WebMvcConfigurer {
 
     @Autowired
     private lateinit var traceIdInterceptor: TraceIdInterceptor

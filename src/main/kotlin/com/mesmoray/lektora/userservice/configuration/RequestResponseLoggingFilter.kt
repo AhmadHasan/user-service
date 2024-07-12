@@ -1,6 +1,7 @@
 package com.mesmoray.lektora.userservice.configuration
 
 import com.mesmoray.lektora.userservice.configuration.traceid.TraceIdInterceptor.Companion.TRACE_ID_MDC_KEY
+import com.mesmoray.lektora.userservice.configuration.useragent.UserAgentInterceptor.Companion.USER_AGENT_MDC_KEY
 import org.slf4j.LoggerFactory
 import org.slf4j.MDC
 import org.springframework.stereotype.Component
@@ -39,13 +40,15 @@ class RequestResponseLoggingFilter : Filter {
         responseTime: Long
     ) {
         val traceId = MDC.get(TRACE_ID_MDC_KEY) ?: "No Trace ID"
+        val userAgent = MDC.get(USER_AGENT_MDC_KEY) ?: "No User Agent Set"
         logger.info(
-            "Trace ID: {}, Request URI: {}, Response Status: {}, Response Time: {} ms, response(100): {}",
+            "Trace ID: {}, User Agent: {}, Request URI: {}, Response Status: {}, Response Time: {} ms, response(1024): {}",
             traceId,
+            userAgent,
             request.requestURI,
             response.status,
             responseTime,
-            response.contentAsByteArray.toString(Charsets.UTF_8).take(100)
+            response.contentAsByteArray.toString(Charsets.UTF_8).take(1024)
         )
     }
 }
