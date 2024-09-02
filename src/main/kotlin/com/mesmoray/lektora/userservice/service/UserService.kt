@@ -4,10 +4,14 @@ import com.mesmoray.lektora.userservice.data.repository.UserRepository
 import com.mesmoray.lektora.userservice.model.Profile
 import com.mesmoray.lektora.userservice.model.User
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.context.ApplicationEventPublisher
 import org.springframework.stereotype.Service
 
 @Service
 class UserService {
+
+    @Autowired
+    private lateinit var applicationEventPublisher: ApplicationEventPublisher
 
     @Autowired
     private lateinit var userRepository: UserRepository
@@ -19,7 +23,9 @@ class UserService {
             )
         )
 
-        userRepository.save(user)
-        return user
+        val storedUser = userRepository.save(user)
+        applicationEventPublisher.publishEvent(UserCreatedAEvent(storedUser))
+
+        return storedUser
     }
 }

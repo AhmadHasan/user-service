@@ -15,6 +15,9 @@ import javax.servlet.http.HttpServletResponse
 
 @Component
 class RequestResponseLoggingFilter : Filter {
+    companion object{
+        private const val MAX_RESPONSE_SIZE = 1024
+    }
 
     private val logger = LoggerFactory.getLogger(RequestResponseLoggingFilter::class.java)
 
@@ -41,6 +44,7 @@ class RequestResponseLoggingFilter : Filter {
     ) {
         val traceId = MDC.get(TRACE_ID_MDC_KEY) ?: "No Trace ID"
         val userAgent = MDC.get(USER_AGENT_MDC_KEY) ?: "No User Agent Set"
+        val responseLog = getResponseLog(response)
         logger.info(
             "Trace ID: {}, User Agent: {}, Request URI: {}, Response Status: {}, Response Time: {} ms, response(1024): {}",
             traceId,
@@ -48,7 +52,16 @@ class RequestResponseLoggingFilter : Filter {
             request.requestURI,
             response.status,
             responseTime,
-            response.contentAsByteArray.toString(Charsets.UTF_8).take(1024)
+            responseLog
         )
     }
+
+    private fun getResponseLog(response: ContentCachingResponseWrapper): Any {
+        val responseString = response.contentAsByteArray.toString(Charsets.UTF_8)
+        var log = responseString.take(1024)
+        if(log.length < responseString.length)
+            log = "$log[$MAX_RESPONSE_SIZE of ${responseString.length} chars]"
+        return log
+    }
 }
+
