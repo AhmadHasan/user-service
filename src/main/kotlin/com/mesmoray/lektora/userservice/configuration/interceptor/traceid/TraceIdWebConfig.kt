@@ -1,4 +1,4 @@
-package com.mesmoray.lektora.userservice.configuration.traceid
+package com.mesmoray.lektora.userservice.configuration.interceptor.traceid
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Configuration

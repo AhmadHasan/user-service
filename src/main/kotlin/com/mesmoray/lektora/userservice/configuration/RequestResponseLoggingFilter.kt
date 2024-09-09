@@ -1,7 +1,7 @@
 package com.mesmoray.lektora.userservice.configuration
 
-import com.mesmoray.lektora.userservice.configuration.traceid.TraceIdInterceptor.Companion.TRACE_ID_MDC_KEY
-import com.mesmoray.lektora.userservice.configuration.useragent.UserAgentInterceptor.Companion.USER_AGENT_MDC_KEY
+import com.mesmoray.lektora.userservice.configuration.interceptor.traceid.TraceIdInterceptor.Companion.TRACE_ID_MDC_KEY
+import com.mesmoray.lektora.userservice.configuration.interceptor.useragent.UserAgentInterceptor.Companion.USER_AGENT_MDC_KEY
 import org.slf4j.LoggerFactory
 import org.slf4j.MDC
 import org.springframework.stereotype.Component
@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse
 
 @Component
 class RequestResponseLoggingFilter : Filter {
-    companion object{
+    companion object {
         private const val MAX_RESPONSE_SIZE = 1024
     }
 
@@ -59,9 +59,9 @@ class RequestResponseLoggingFilter : Filter {
     private fun getResponseLog(response: ContentCachingResponseWrapper): Any {
         val responseString = response.contentAsByteArray.toString(Charsets.UTF_8)
         var log = responseString.take(1024)
-        if(log.length < responseString.length)
+        if (log.length < responseString.length) {
             log = "$log[$MAX_RESPONSE_SIZE of ${responseString.length} chars]"
+        }
         return log
     }
 }
-

@@ -1,4 +1,4 @@
-package com.mesmoray.lektora.userservice.configuration.useragent
+package com.mesmoray.lektora.userservice.configuration.interceptor.useragent
 
 import org.slf4j.MDC
 import org.springframework.stereotype.Component
@@ -14,8 +14,8 @@ class UserAgentInterceptor : HandlerInterceptor {
     }
 
     override fun preHandle(request: HttpServletRequest, response: HttpServletResponse, handler: Any): Boolean {
-        val traceId = request.getHeader(USER_AGENT_HEADER) ?: "Not Found"
-        MDC.put(USER_AGENT_MDC_KEY, traceId)
+        val userId = request.getHeader(USER_AGENT_HEADER) ?: "Not Found"
+        MDC.put(USER_AGENT_MDC_KEY, userId)
         return true
     }
 }

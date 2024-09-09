@@ -17,7 +17,6 @@ class RabbitMQAdapter : MessageSender {
     @Autowired
     private lateinit var rabbitTemplate: RabbitTemplate
 
-
     @EventListener(UserCreatedAEvent::class)
     fun sendUserCreatedEvent(event: UserCreatedAEvent) {
         rabbitTemplate.convertAndSend(
@@ -26,5 +25,4 @@ class RabbitMQAdapter : MessageSender {
             event
         )
     }
-
 }

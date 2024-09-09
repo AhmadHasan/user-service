@@ -1,4 +1,4 @@
-package com.mesmoray.lektora.userservice.configuration.traceid
+package com.mesmoray.lektora.userservice.configuration.interceptor.traceid
 
 import org.slf4j.MDC
 import org.springframework.stereotype.Component
