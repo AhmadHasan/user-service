@@ -38,25 +38,25 @@ class UserController {
         )
     }
 
-    @PostMapping("/profile/addCountry")
+    @PostMapping("/profile/add-country")
     @ResponseStatus(HttpStatus.OK)
     fun addUserCountry(@RequestParam countryCode: String) {
         userService.addUserCountry(countryCode)
     }
 
-    @PostMapping("/profile/removeCountry")
+    @PostMapping("/profile/remove-country")
     @ResponseStatus(HttpStatus.OK)
     fun removeUserCountry(@RequestParam countryCode: String) {
         userService.removeUserCountry(countryCode)
     }
 
-    @PostMapping("/profile/addLanguage")
+    @PostMapping("/profile/add-language")
     @ResponseStatus(HttpStatus.OK)
     fun addUserLanguage(@RequestParam languageCode: String) {
         userService.addUserLanguage(languageCode)
     }
 
-    @PostMapping("/profile/removeLanguage")
+    @PostMapping("/profile/remove-language")
     @ResponseStatus(HttpStatus.OK)
     fun removeUserLanguage(@RequestParam languageCode: String) {
         userService.removeUserLanguage(languageCode)

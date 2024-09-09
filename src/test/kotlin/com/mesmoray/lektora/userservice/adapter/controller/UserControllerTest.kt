@@ -54,7 +54,7 @@ class UserControllerTest {
     @Test
     fun `addUserCountry should return 200 on success`() {
         mockMvc.perform(
-            post("/user/profile/addCountry")
+            post("/user/profile/add-country")
                 .param("countryCode", "DE")
         )
             .andExpect(status().isOk)
@@ -63,7 +63,7 @@ class UserControllerTest {
     @Test
     fun `removeUserCountry should return 200 on success`() {
         mockMvc.perform(
-            post("/user/profile/removeCountry")
+            post("/user/profile/remove-country")
                 .param("countryCode", "DE")
         )
             .andExpect(status().isOk)
@@ -72,7 +72,7 @@ class UserControllerTest {
     @Test
     fun `addUserLanguage should return 200 on success`() {
         mockMvc.perform(
-            post("/user/profile/addLanguage")
+            post("/user/profile/add-language")
                 .param("languageCode", "de")
         )
             .andExpect(status().isOk)
@@ -81,7 +81,7 @@ class UserControllerTest {
     @Test
     fun `removeUserLanguage should return 200 on success`() {
         mockMvc.perform(
-            post("/user/profile/removeLanguage")
+            post("/user/profile/remove-language")
                 .param("languageCode", "de")
         )
             .andExpect(status().isOk)
