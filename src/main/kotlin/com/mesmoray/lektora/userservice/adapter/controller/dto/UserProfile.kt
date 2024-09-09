@@ -1,4 +1,4 @@
-package com.mesmoray.lektora.userservice.adapter.web.input.dto
+package com.mesmoray.lektora.userservice.adapter.controller.dto
 
 data class UserProfile(
     val countryCodes: List<String>,

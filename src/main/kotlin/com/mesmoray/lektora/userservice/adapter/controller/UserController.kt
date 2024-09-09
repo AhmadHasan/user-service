@@ -1,6 +1,6 @@
-package com.mesmoray.lektora.userservice.adapter.web.input
+package com.mesmoray.lektora.userservice.adapter.controller
 
-import com.mesmoray.lektora.userservice.adapter.web.input.dto.UserProfile
+import com.mesmoray.lektora.userservice.adapter.controller.dto.UserProfile
 import com.mesmoray.lektora.userservice.model.User
 import com.mesmoray.lektora.userservice.service.UserService
 import org.springframework.beans.factory.annotation.Autowired

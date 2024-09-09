@@ -1,9 +1,11 @@
 package com.mesmoray.lektora.userservice.service
 
 import com.mesmoray.lektora.userservice.configuration.SessionManager
+import com.mesmoray.lektora.userservice.configuration.interceptor.userid.UserIdInterceptor.Companion.USER_ID_HEADER
 import com.mesmoray.lektora.userservice.data.repository.UserRepository
 import com.mesmoray.lektora.userservice.model.Profile
 import com.mesmoray.lektora.userservice.model.User
+import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.ApplicationEventPublisher
 import org.springframework.stereotype.Service
@@ -13,6 +15,8 @@ class UserService {
 
     @Autowired
     private lateinit var applicationEventPublisher: ApplicationEventPublisher
+
+    private val logger = LoggerFactory.getLogger(this::class.java)
 
     @Autowired
     private lateinit var sessionManager: SessionManager
@@ -71,10 +75,10 @@ class UserService {
     }
 
     private fun getUser(): User {
-        val userId = sessionManager.getUserId() ?: throw IllegalArgumentException("No UserID header provided")
+        val userId = sessionManager.getUserId() ?: throw IllegalArgumentException("No $USER_ID_HEADER header provided")
         val userOptional = userRepository.findById(userId)
         if (userOptional.isEmpty) {
-            throw NoSuchElementException("User not found")
+            throw NoSuchElementException("User with id = $userId not found")
         }
         return userOptional.get()
     }

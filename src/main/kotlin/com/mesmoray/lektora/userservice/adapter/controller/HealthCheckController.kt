@@ -1,4 +1,4 @@
-package com.mesmoray.lektora.userservice.adapter.web.input
+package com.mesmoray.lektora.userservice.adapter.controller
 
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.http.ResponseEntity

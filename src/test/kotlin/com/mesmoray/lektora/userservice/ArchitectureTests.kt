@@ -29,7 +29,7 @@ class ArchitectureTests {
     fun `controllers should be in the controller package`() {
         val rule = classes()
             .that().areAnnotatedWith(RestController::class.java)
-            .should().resideInAPackage("$basePackage.adapter.web.input..")
+            .should().resideInAPackage("$basePackage.adapter.controller..")
 
         rule.check(importedClasses)
     }
@@ -56,7 +56,7 @@ class ArchitectureTests {
     @Test
     fun `controllers should not access repositories`() {
         val rule = noClasses()
-            .that().resideInAPackage("..adapter.web.input..")
+            .that().resideInAPackage("..adapter.controller..")
             .should().accessClassesThat().resideInAPackage("..repository..")
 
         rule.check(importedClasses)
@@ -91,7 +91,7 @@ class ArchitectureTests {
     fun `services should only be accessed by controllers`() {
         val rule = classes()
             .that().resideInAPackage("..service..")
-            .should().onlyBeAccessed().byAnyPackage("..web.input..", "..service..")
+            .should().onlyBeAccessed().byAnyPackage("..controller..", "..service..")
             .orShould().onlyBeAccessed().byAnyPackage("..service..")
 
         rule.check(importedClasses)
