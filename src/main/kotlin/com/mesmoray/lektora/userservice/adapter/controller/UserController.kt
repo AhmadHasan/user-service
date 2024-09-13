@@ -5,6 +5,7 @@ import com.mesmoray.lektora.userservice.model.User
 import com.mesmoray.lektora.userservice.service.UserService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
+import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -27,6 +28,12 @@ class UserController {
             countryCodes = userProfile.countryCodes,
             languageCodes = userProfile.languageCodes
         )
+    }
+
+    @GetMapping
+    @ResponseStatus(HttpStatus.OK)
+    fun getUser(): User {
+        return userService.getUser()
     }
 
     @PostMapping

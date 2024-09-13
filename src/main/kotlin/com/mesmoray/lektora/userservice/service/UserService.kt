@@ -38,21 +38,25 @@ class UserService {
         return storedUser
     }
 
+    fun getUser(): User {
+        return findUser()
+    }
+
     fun updateUserProfile(countryCodes: List<String>, languageCodes: List<String>): User {
-        val user = getUser()
+        val user = findUser()
         val updatedUser = user.copy(profile = Profile(countryCodes, languageCodes))
         return updateUser(updatedUser)
     }
 
     fun addUserCountry(countryCode: String): User {
-        val user = getUser()
+        val user = findUser()
         if (user.profile.countryCodes.contains(countryCode)) throw IllegalArgumentException("Country $countryCode is already part of user profile (userId = ${user.id})")
         val updatedUser = user.copy(profile = user.profile.copy(countryCodes = user.profile.countryCodes + countryCode))
         return updateUser(updatedUser)
     }
 
     fun removeUserCountry(countryCode: String): User {
-        val user = getUser()
+        val user = findUser()
         if (!user.profile.countryCodes.contains(countryCode)) throw IllegalArgumentException("Country $countryCode is not part of user profile (userId = ${user.id})")
         val newCountryCodes = user.profile.countryCodes.filter { it != countryCode }
         val updatedUser = user.copy(profile = user.profile.copy(countryCodes = newCountryCodes))
@@ -60,21 +64,21 @@ class UserService {
     }
 
     fun addUserLanguage(languageCode: String): User {
-        val user = getUser()
+        val user = findUser()
         if (user.profile.languageCodes.contains(languageCode)) throw IllegalArgumentException("Language $languageCode is already part of user profile (userId = ${user.id})")
         val updatedUser = user.copy(profile = user.profile.copy(languageCodes = user.profile.languageCodes + languageCode))
         return updateUser(updatedUser)
     }
 
     fun removeUserLanguage(languageCode: String): User {
-        val user = getUser()
+        val user = findUser()
         if (!user.profile.languageCodes.contains(languageCode)) throw IllegalArgumentException("Language $languageCode is not part of user profile (userId = ${user.id})")
         val newLanguageCodes = user.profile.languageCodes.filter { it != languageCode }
         val updatedUser = user.copy(profile = user.profile.copy(languageCodes = newLanguageCodes))
         return updateUser(updatedUser)
     }
 
-    private fun getUser(): User {
+    private fun findUser(): User {
         val userId = sessionManager.getUserId() ?: throw IllegalArgumentException("No $USER_ID_HEADER header provided")
         val userOptional = userRepository.findById(userId)
         if (userOptional.isEmpty) {
