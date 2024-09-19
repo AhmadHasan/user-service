@@ -1,6 +1,5 @@
 package com.mesmoray.lektora.userservice.adapter.controller.dto
 
-data class UserProfile(
-    val countryCodes: List<String>,
+data class LanguagesRequestDTO(
     val languageCodes: List<String>
 )

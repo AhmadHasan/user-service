@@ -63,7 +63,7 @@ class UserServiceTest {
         whenever(userRepository.save(any<User>())).thenReturn(user)
         whenever(applicationEventPublisher.publishEvent(any<UserCreatedAEvent>())).then { }
 
-        userService.createUser(user.profile.countryCodes, user.profile.languageCodes)
+        userService.createUser(user.profile.countryCodes, user.profile.languageCodes, user.profile.publisherNames)
 
         verify(userRepository).save(any<User>())
         verify(applicationEventPublisher).publishEvent(any<UserCreatedAEvent>())
@@ -72,7 +72,7 @@ class UserServiceTest {
     @Test
     fun `updateUserProfile throws IllegalArgumentException when userId not set`() {
         assertThrows(IllegalArgumentException::class.java) {
-            userService.updateUserProfile(user.profile.countryCodes, user.profile.languageCodes)
+            userService.updateUserProfile(user.profile.countryCodes, user.profile.languageCodes, user.profile.publisherNames)
         }
     }
 
@@ -80,7 +80,7 @@ class UserServiceTest {
     fun `updateUserProfile throws NoSuchElementException when user not found`() {
         whenever(sessionManager.getUserId()).thenReturn(nonExistingUser.id)
         assertThrows(NoSuchElementException::class.java) {
-            userService.updateUserProfile(user.profile.countryCodes, user.profile.languageCodes)
+            userService.updateUserProfile(user.profile.countryCodes, user.profile.languageCodes, user.profile.publisherNames)
         }
     }
 
@@ -90,7 +90,11 @@ class UserServiceTest {
         whenever(userRepository.save(any<User>())).thenReturn(user)
         whenever(userRepository.findById(user.id)).thenReturn(Optional.of(user))
         whenever(applicationEventPublisher.publishEvent(any<UserUpdatedAEvent>())).then { }
-        userService.updateUserProfile(user.profile.countryCodes + "DE", user.profile.languageCodes + "de")
+        userService.updateUserProfile(
+            user.profile.countryCodes + "DE",
+            user.profile.languageCodes + "de",
+            user.profile.publisherNames + "Test Publisher"
+        )
         verify(userRepository).save(capture(userCaptor))
         val user = userCaptor.value
         assertThat(user.profile.countryCodes).contains("DE")

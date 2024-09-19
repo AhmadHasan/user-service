@@ -12,8 +12,8 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 
-@WebMvcTest(UserController::class)
-class UserControllerTest {
+@WebMvcTest(UserProfileController::class)
+class UserProfileControllerTest {
 
     @Autowired
     private lateinit var mockMvc: MockMvc
@@ -65,6 +65,18 @@ class UserControllerTest {
         mockMvc.perform(
             post("/user/profile/remove-country")
                 .param("countryCode", "DE")
+        )
+            .andExpect(status().isOk)
+    }
+
+    @Test
+    fun `setUserLanguages should return 200 on success`() {
+        val userLanguages = """{ "languageCodes": ["de", "en"] }"""
+
+        mockMvc.perform(
+            put("/user/profile/languages")
+                .contentType("application/json")
+                .content(userLanguages)
         )
             .andExpect(status().isOk)
     }
