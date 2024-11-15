@@ -46,10 +46,11 @@ class RequestResponseLoggingFilter : Filter {
         val userAgent = MDC.get(USER_AGENT_MDC_KEY) ?: "No User Agent Set"
         val responseLog = getResponseLog(response)
         logger.info(
-            "Trace ID: {}, User Agent: {}, Request URI: {}, Response Status: {}, Response Time: {} ms, response(1024): {}",
+            "Trace ID: {}, User Agent: {}, Request URI: {}, Method: {} Response Status: {}, Response Time: {} ms, response(1024): {}",
             traceId,
             userAgent,
             request.requestURI,
+            request.method,
             response.status,
             responseTime,
             responseLog
